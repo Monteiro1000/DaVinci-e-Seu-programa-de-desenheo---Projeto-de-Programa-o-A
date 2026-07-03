@@ -7,7 +7,7 @@ from classe_linha import *
 from classe_elipse import *
 
 #from classe_retangulo import *
-#from classe_rabisco import *
+from classe_rabisco import *
 from classe_circulo import *
 
 

@@ -90,6 +90,11 @@ class Elipse(Figura):
                     figura[1][3],
                     outline=figura[2]
                 )
+            
+            elif figura[0] == "Rabisco":
+                nome, values, cor = figura
+                canvas.create_line(values, fill=cor)
+
 
     def incompleta(self):
         return (
