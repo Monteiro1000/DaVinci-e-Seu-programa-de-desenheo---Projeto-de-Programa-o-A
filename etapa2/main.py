@@ -3,7 +3,6 @@ from tela_figuras import *
 from classe_figura import *
 from classe_linha import *
 from tkinter import ttk
-from classe_rabisco import *
 
 
 #******* MAIN *******#
@@ -30,10 +29,10 @@ def clique_no_mouse(event):
             figura = Linha()
             return figura
         elif tipo_figura_var.get() == "Retângulo":
-            figura = figura
+            figura = figura #adicionar retangulo
             return figura
         elif tipo_figura_var.get() == "Rabisco":
-            figura = Rabisco()
+            figura = figura #adicionar rabisco
             return figura
     
     def iniciar_figura(event):

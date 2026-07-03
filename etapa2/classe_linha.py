@@ -19,6 +19,8 @@ class Linha(Figura):
     def inicia_figura(self, event):
         self.ini_x = event.x
         self.ini_y = event.y
+        self.fim_x = event.x
+        self.fim_y = event.y
 
     # Quando o mouse é movido com o botão pressionado
     def atualiza_figura(self, event):
@@ -30,6 +32,8 @@ class Linha(Figura):
 
     # Quando o mouse é solto
     def incluir_figura(self, event):
+        if self.incompleta():
+            return # Não desenha se a linha for incompleta
         canvas.create_line(self.ini_x, self.ini_y, self.fim_x, self.fim_y, fill=self.cor)  # Desenha a linha final
         self.coordenadas = (self.ini_x, self.ini_y, self.fim_x, self.fim_y)  # salva as coordenadas da linha como tupla num parametro do objeto linha
         figuras.append((self.coordenadas, self.cor))  # Adiciona a linha à lista de figuras desenhadas
