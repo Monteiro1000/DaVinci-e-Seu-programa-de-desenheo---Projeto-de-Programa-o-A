@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-
+from classe_cores import *
 from tela_figuras import *
 from classe_figura import *
 from classe_linha import *
@@ -23,7 +23,7 @@ def option_menu_desenhos():
     Label(
         frame,
         text="Tipo de figura:"
-    ).grid(column=0, row=0, sticky=NW, padx=8, pady=5)
+    ).grid(column=0, row=0, sticky=NW, padx=8, pady=0)
 
     global tipo_figura_var
 
@@ -41,7 +41,7 @@ def option_menu_desenhos():
         "Elipse"
     )
 
-    option_menu.grid(column=0, row=0, sticky=NW, padx=15, pady=30)
+    option_menu.grid(column=0, row=0, sticky=NW, padx=4, pady=25)
 
 
 option_menu_desenhos()
