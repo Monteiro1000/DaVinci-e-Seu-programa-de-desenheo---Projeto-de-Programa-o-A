@@ -20,14 +20,12 @@ class Circulo(Figura):
         )
 
         self.cor = "black"
+        self.raio = None
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):
         self.ini_x = event.x
         self.ini_y = event.y
-
-        self.fim_x = event.x
-        self.fim_y = event.y
 
     # Quando o mouse é movido
     def atualiza_figura(self, event):
@@ -37,14 +35,9 @@ class Circulo(Figura):
      
         self.desenhar_figura()
 
-        canvas.create_oval(
-            self.ini_x,
-            self.ini_y,
-            self.fim_x,
-            self.fim_y,
-            dash=(4, 2),
-            outline=self.cor
-        )
+        self.raio = ( (self.ini_x - self.fim_x)**2 + (self.ini_y - self.fim_y)**2 ) ** 0.5 #calcula o raio do circulo
+
+        canvas.create_oval(self.ini_x-self.raio, self.ini_y-self.raio, self.ini_x+self.raio, self.ini_y+self.raio, dash=(4,2),outline=self.cor)
 
     # Quando o mouse é solto
     def incluir_figura(self, event):
@@ -55,8 +48,7 @@ class Circulo(Figura):
         self.coordenadas = (
             self.ini_x,
             self.ini_y,
-            self.fim_x,
-            self.fim_y
+            self.raio
         )
 
         figuras.append(
@@ -77,7 +69,9 @@ class Circulo(Figura):
                 canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
             
             elif figura[0] == "Círculo":
-                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+                nome, coordenadas, cor = figura #separa os dados de circulo
+                canvas.create_oval(coordenadas[0]-coordenadas[2], coordenadas[1]-coordenadas[2],
+                                   coordenadas[0]+coordenadas[2], coordenadas[1]+coordenadas[2], outline=cor)
 
             elif figura[0] == "Rabisco":
                 nome, values, cor = figura
