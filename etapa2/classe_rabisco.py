@@ -17,7 +17,7 @@ class Rabisco(Figura):
         if self.incompleta():
             return # Não desenha se o rabisco for incompleto
         figuras.append((self.nome,self.coordenadas, self.cor))  # Adiciona o rabisco à lista de figuras desenhadas
-        self.desenhar_figuras()
+        self.desenhar_figura()
 
     def desenhar_figura(self):
          canvas.delete("all") # Limpa os rastros antigos
