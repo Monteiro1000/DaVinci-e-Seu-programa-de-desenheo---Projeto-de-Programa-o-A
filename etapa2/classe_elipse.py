@@ -66,34 +66,25 @@ class Elipse(Figura):
         self.desenhar_figura()
 
     def desenhar_figura(self):
+         canvas.delete("all") # Limpa os rastros antigos
 
-        canvas.delete("all")
-
-        for figura in figuras:
-
+         for figura in figuras:
             if figura[0] == "Linha":
-
-                canvas.create_line(
-                    figura[1][0],
-                    figura[1][1],
-                    figura[1][2],
-                    figura[1][3],
-                    fill=figura[2]
-                )
+                canvas.create_line(figura[1][0], figura[1][1], figura[1][2], figura[1][3], fill=figura[2])
 
             elif figura[0] == "Elipse":
-
-                canvas.create_oval(
-                    figura[1][0],
-                    figura[1][1],
-                    figura[1][2],
-                    figura[1][3],
-                    outline=figura[2]
-                )
+                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
             
+            elif figura[0] == "Círculo":
+                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+
             elif figura[0] == "Rabisco":
                 nome, values, cor = figura
                 canvas.create_line(values, fill=cor)
+
+            elif figura[0] == "Retângulo":
+                canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+        
 
 
     def incompleta(self):

@@ -5,9 +5,8 @@ from tela_figuras import *
 from classe_figura import *
 from classe_linha import *
 from classe_elipse import *
-
-#from classe_retangulo import *
 from classe_rabisco import *
+from classe_retangulo import *
 from classe_circulo import *
 
 
@@ -58,10 +57,10 @@ def criar_figura():
     elif opcao == "Elipse":
         return Elipse()
     
-    #elif opcao == "Círculo":
+    elif opcao == "Círculo":
         return Circulo()
 
-    #elif opcao == "Retângulo":
+    elif opcao == "Retângulo":
         return Retangulo()
 
     elif opcao == "Rabisco":

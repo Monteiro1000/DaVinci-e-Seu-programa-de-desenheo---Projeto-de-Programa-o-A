@@ -34,7 +34,7 @@ class Circulo(Figura):
 
         self.fim_x = event.x
         self.fim_y = event.y
-
+     
         self.desenhar_figura()
 
         canvas.create_oval(
@@ -58,6 +58,39 @@ class Circulo(Figura):
             self.fim_x,
             self.fim_y
         )
+
+        figuras.append(
+            ("Círculo", self.coordenadas, self.cor)
+        )
+
+        self.desenhar_figura()
+
+
+    def desenhar_figura(self):
+         canvas.delete("all") # Limpa os rastros antigos
+
+         for figura in figuras:
+            if figura[0] == "Linha":
+                canvas.create_line(figura[1][0], figura[1][1], figura[1][2], figura[1][3], fill=figura[2])
+
+            elif figura[0] == "Elipse":
+                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+            
+            elif figura[0] == "Círculo":
+                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+
+            elif figura[0] == "Rabisco":
+                nome, values, cor = figura
+                canvas.create_line(values, fill=cor)
+
+            elif figura[0] == "Retângulo":
+                canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
         
-        self.cor = "black"
+         self.cor = "black"
+
+    def incompleta(self):
+          return (
+             self.ini_x == self.fim_x and
+            self.ini_y == self.fim_y
+        )
         
