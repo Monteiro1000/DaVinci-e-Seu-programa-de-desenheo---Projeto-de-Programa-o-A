@@ -1,50 +1,93 @@
 from tkinter import *
+from tkinter import ttk
+
 from tela_figuras import *
 from classe_figura import *
 from classe_linha import *
-from tkinter import ttk
+from classe_elipse import *
+
+#from classe_retangulo import *
+#from classe_rabisco import *
+from classe_circulo import *
 
 
-#******* MAIN *******#
+# ******** MAIN ******** #
 
-figura = Linha()  # Inicializa a figura como uma linha
+figura = Linha()  # Figura inicial
 
-def  option_menu_desenhos(): #função para criar o option menu de desenhos
-    label = Label(frame, text="")
-    label.grid(column=0, row=0, sticky=NW, padx=15, pady=15)
-    descricao_opcao_figura = Label(frame, text="Tipo de figura:") # Label para o option menu de figuras
-    descricao_opcao_figura.grid(column=0, row=0, sticky=NW, padx=8, pady=5)
+
+def option_menu_desenhos():
+    """Cria o menu de seleção das figuras."""
+
+    Label(frame, text="").grid(column=0, row=0, sticky=NW, padx=15, pady=15)
+
+    Label(
+        frame,
+        text="Tipo de figura:"
+    ).grid(column=0, row=0, sticky=NW, padx=8, pady=5)
+
     global tipo_figura_var
-    tipo_figura_var = StringVar(tela) # Guarda o tipo de figura selecionado no option menu (linha ou rabisco)
-    option_menu = ttk.OptionMenu(frame, tipo_figura_var,
-                                'Linha', 'Linha', 'Rabisco', 'Círculo', 'Retângulo','Elipse') # valores possíveis do option menu
+
+    tipo_figura_var = StringVar(tela)
+    tipo_figura_var.set("Linha")
+
+    option_menu = ttk.OptionMenu(
+        frame,
+        tipo_figura_var,
+        "Linha",
+        "Linha",
+        "Rabisco",
+        "Círculo",
+        "Retângulo",
+        "Elipse"
+    )
+
     option_menu.grid(column=0, row=0, sticky=NW, padx=15, pady=30)
 
-option_menu_desenhos()  # Chama a função para criar o option menu de desenhos
+
+option_menu_desenhos()
+
+
+def criar_figura():
+
+    opcao = tipo_figura_var.get()
+
+    if opcao == "Linha":
+        return Linha()
+
+    elif opcao == "Elipse":
+        return Elipse()
+    
+    #elif opcao == "Círculo":
+        return Circulo()
+
+    #elif opcao == "Retângulo":
+        return Retangulo()
+
+    elif opcao == "Rabisco":
+        return Rabisco()
+
+    return Linha()
+
 
 def clique_no_mouse(event):
 
-    def criar_figura():
-        if tipo_figura_var.get() == "Linha":
-            figura = Linha()
-            return figura
-        elif tipo_figura_var.get() == "Retângulo":
-            figura = figura #adicionar retangulo
-            return figura
-        elif tipo_figura_var.get() == "Rabisco":
-            figura = figura #adicionar rabisco
-            return figura
-    
-    def iniciar_figura(event):
-        figura.inicia_figura(event)
-    
-    criar_figura()  # Cria a figura com base na seleção do option menu
-    iniciar_figura(event)  # Inicia a figura com base no evento do clique do mouse
+    global figura
 
-canvas.bind('<ButtonPress-1>', clique_no_mouse)
-canvas.bind('<B1-Motion>', figura.atualiza_figura)
-canvas.bind('<ButtonRelease-1>', figura.incluir_figura)
+    figura = criar_figura()
+    figura.inicia_figura(event)
 
 
+def mover_mouse(event):
+    figura.atualiza_figura(event)
+
+
+def soltar_mouse(event):
+    figura.incluir_figura(event)
+
+
+canvas.bind("<ButtonPress-1>", clique_no_mouse)
+canvas.bind("<B1-Motion>", mover_mouse)
+canvas.bind("<ButtonRelease-1>", soltar_mouse)
 
 tela.mainloop()

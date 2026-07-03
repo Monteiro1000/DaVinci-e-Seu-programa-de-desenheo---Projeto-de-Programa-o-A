@@ -2,10 +2,10 @@ from classe_figura import *
 from tela_figuras import *
 
 
-class Linha(Figura):
+class Elipse(Figura):
 
     def __init__(self):
-        super().__init__("Linha", None, None)
+        super().__init__("Elipse", None, None)
 
         self.ini_x = None
         self.ini_y = None
@@ -25,10 +25,11 @@ class Linha(Figura):
     def inicia_figura(self, event):
         self.ini_x = event.x
         self.ini_y = event.y
+
         self.fim_x = event.x
         self.fim_y = event.y
 
-    # Quando o mouse é movido com o botão pressionado
+    # Quando o mouse é movido
     def atualiza_figura(self, event):
 
         self.fim_x = event.x
@@ -36,13 +37,13 @@ class Linha(Figura):
 
         self.desenhar_figura()
 
-        canvas.create_line(
+        canvas.create_oval(
             self.ini_x,
             self.ini_y,
             self.fim_x,
             self.fim_y,
             dash=(4, 2),
-            fill=self.cor
+            outline=self.cor
         )
 
     # Quando o mouse é solto
@@ -92,7 +93,6 @@ class Linha(Figura):
 
     def incompleta(self):
         return (
-            self.ini_x == self.fim_x and
+            self.ini_x == self.fim_x or
             self.ini_y == self.fim_y
         )
-

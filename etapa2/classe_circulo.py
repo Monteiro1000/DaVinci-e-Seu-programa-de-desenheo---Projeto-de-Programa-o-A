@@ -1,0 +1,63 @@
+from classe_figura import *
+from tela_figuras import *
+
+
+class Circulo(Figura):
+
+    def __init__(self):
+        super().__init__("Círculo", None, None)
+
+        self.ini_x = None
+        self.ini_y = None
+        self.fim_x = None
+        self.fim_y = None
+
+        self.coordenadas = (
+            self.ini_x,
+            self.ini_y,
+            self.fim_x,
+            self.fim_y
+        )
+
+        self.cor = "black"
+
+    # Quando o mouse é pressionado
+    def inicia_figura(self, event):
+        self.ini_x = event.x
+        self.ini_y = event.y
+
+        self.fim_x = event.x
+        self.fim_y = event.y
+
+    # Quando o mouse é movido
+    def atualiza_figura(self, event):
+
+        self.fim_x = event.x
+        self.fim_y = event.y
+
+        self.desenhar_figura()
+
+        canvas.create_oval(
+            self.ini_x,
+            self.ini_y,
+            self.fim_x,
+            self.fim_y,
+            dash=(4, 2),
+            outline=self.cor
+        )
+
+    # Quando o mouse é solto
+    def incluir_figura(self, event):
+
+        if self.incompleta():
+            return
+
+        self.coordenadas = (
+            self.ini_x,
+            self.ini_y,
+            self.fim_x,
+            self.fim_y
+        )
+        
+        self.cor = "black"
+        
