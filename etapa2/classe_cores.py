@@ -20,6 +20,7 @@ option_menu2 = ttk.OptionMenu(
     'Nenhum'
     ) # valores possíveis do option menu de cores para contorno
 
+
 option_menu2.grid(
   column=1, row=0, sticky=NW, padx=4, pady=25
   )
@@ -50,3 +51,7 @@ option_menu3 = ttk.OptionMenu(
 option_menu3.grid(
     column=1, row=0, sticky=NE, padx=62, pady=25
     )
+
+if cor_figura_var_contorno.get() == "Nenhum":
+    cor_figura_var_contorno = cor_figura_var_preenchimento.get()
+    

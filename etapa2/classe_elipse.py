@@ -1,5 +1,6 @@
 from classe_figura import *
 from tela_figuras import *
+from classe_cores import *
 
 
 class Elipse(Figura):
@@ -19,7 +20,8 @@ class Elipse(Figura):
             self.fim_y
         )
 
-        self.cor = "black"
+        self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
+        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()]#associa a cor escolhida ao dicionario de cores (preenchimento)
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):
@@ -43,7 +45,7 @@ class Elipse(Figura):
             self.fim_x,
             self.fim_y,
             dash=(4, 2),
-            outline=self.cor
+            outline=self.cor_contorno
         )
 
     # Quando o mouse é solto
@@ -60,7 +62,7 @@ class Elipse(Figura):
         )
 
         figuras.append(
-            (self.nome, self.coordenadas, self.cor)
+            (self.nome, self.coordenadas, self.cor_contorno, self.cor_preenchimento)
         )
 
         self.desenhar_figura()
@@ -73,17 +75,22 @@ class Elipse(Figura):
                 canvas.create_line(figura[1][0], figura[1][1], figura[1][2], figura[1][3], fill=figura[2])
 
             elif figura[0] == "Elipse":
-                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], 
+                                   outline=figura[2], fill=figura[3])
             
             elif figura[0] == "Círculo":
-                canvas.create_oval(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+                nome, coordenadas, cor_contorno, cor_preenchimento = figura #separa os dados de circulo
+                canvas.create_oval(coordenadas[0]-coordenadas[2], coordenadas[1]-coordenadas[2],
+                                   coordenadas[0]+coordenadas[2], coordenadas[1]+coordenadas[2],
+                                    outline=cor_contorno, fill=cor_preenchimento )
 
             elif figura[0] == "Rabisco":
-                nome, values, cor = figura
+                nome, values, cor = figura # separa a variavel em parametros diferentes
                 canvas.create_line(values, fill=cor)
 
             elif figura[0] == "Retângulo":
-                canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3], outline=figura[2])
+                canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3],
+                                         outline=figura[2], fill=figura[3])
         
 
 
