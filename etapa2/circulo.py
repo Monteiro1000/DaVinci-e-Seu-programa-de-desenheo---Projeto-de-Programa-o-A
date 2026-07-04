@@ -36,8 +36,7 @@ class Circulo(Figura):
         self.fim_y = event.y
      
         self.desenhar_figura()
-        if self.incompleta():
-            self.raio = ( (self.ini_x - self.fim_x)**2 + (self.ini_y - self.fim_y)**2 ) ** 0.5 #calcula o raio do circulo
+        self.raio = ( (self.ini_x - self.fim_x)**2 + (self.ini_y - self.fim_y)**2 ) ** 0.5 #calcula o raio do circulo
 
         canvas.create_oval(self.ini_x-self.raio, self.ini_y-self.raio, self.ini_x+self.raio, self.ini_y+self.raio, dash=(4,2),
                            outline=self.cor_contorno)
