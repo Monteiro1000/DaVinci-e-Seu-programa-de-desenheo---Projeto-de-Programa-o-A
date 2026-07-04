@@ -3,7 +3,7 @@ from tkinter import *
 
 
 
-
+dicionario_cores = {'Preto': 'black', 'Branco': 'white', 'Vermelho': 'red', 'Verde': 'green', 'Azul': 'blue','Nenhum': ''   }
 figuras = []  # Lista para armazenar todas as figuras desenhadas
 tela = Tk()
 frame = Frame(tela)
