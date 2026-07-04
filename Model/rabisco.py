@@ -1,41 +1,25 @@
-from figura import *
-from tela import *
-from opcoes import *
+from Model.figura import *
+from View.tela import *
+from View.opcoes import *
 
-class Retangulo(Figura):
+class Rabisco(Figura):
+
     def __init__(self):
-        super().__init__("Retângulo", None, None)
-        self.ini_x = None
-        self.ini_y = None
-        self.fim_x = None
-        self.fim_y = None
-
-        self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
-        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()] #associa a cor escolhida ao dicionario de cores (preenchimento)
+        super().__init__(nome="Rabisco", coordenadas=None, 
+        cor=dicionario_cores[cor_figura_var_contorno.get()])
+        # inicia a classe Rabisco ja selecionando a cor escolhida
 
     def inicia_figura(self, event):
-        self.ini_x = event.x
-        self.ini_y = event.y
+        self.coordenadas= [(event.x, event.y)]
 
     def atualiza_figura(self, event):
-        self.fim_x = event.x
-        self.fim_y = event.y
-        self.desenhar_figura()
-        # Desenha o retângulo temporário (pontilhado) enquanto arrasta
-        canvas.create_rectangle(self.ini_x, self.ini_y, self.fim_x, self.fim_y, dash=(4, 2), outline=self.cor)
-
-    def incluir_figura(self, event):
-        self.fim_x = event.x
-        self.fim_y = event.y
-
-        if self.incompleta():
-            self.desenhar_figura()
-            return  # Não desenha se o retângulo for incompleto
+        self.coordenadas.append((event.x, event.y))
+        canvas.create_line(self.coordenadas, dash=(4, 2), fill=self.cor)
     
-        self.coordenadas = (self.ini_x, self.ini_y, self.fim_x, self.fim_y)
-
-        #Guardamos uma tupla contendo: (tipo_da_figura, coordenadas, cor)
-        figuras.append(("Retângulo", self.coordenadas, self.cor_contorno, self.cor_preenchimento))
+    def incluir_figura(self, event):
+        if self.incompleta():
+            return # Não desenha se o rabisco for incompleto
+        figuras.append((self.nome,self.coordenadas, self.cor))  # Adiciona o rabisco à lista de figuras desenhadas
         self.desenhar_figura()
 
     def desenhar_figura(self):
@@ -64,6 +48,6 @@ class Retangulo(Figura):
                                          outline=figura[2], fill=figura[3])
         
 
-
     def incompleta(self):
-        return self.ini_x == self.fim_x and self.ini_y == self.fim_y
+        return len(self.coordenadas)  <= 1
+

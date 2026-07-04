@@ -1,6 +1,6 @@
-from figura import *
-from tela import *
-from opcoes import*
+from Model.figura import *
+from View.tela import *
+from View.opcoes import*
 
 
 class Circulo(Figura):

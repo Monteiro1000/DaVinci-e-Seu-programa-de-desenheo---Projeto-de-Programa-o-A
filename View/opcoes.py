@@ -1,6 +1,6 @@
 from tkinter import ttk
-from tela import *
-from figura import *
+from View.tela import *
+from Model.figura import *
 
 def option_menu_desenhos():
     """Cria o menu de seleção das figuras."""

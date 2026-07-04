@@ -1,74 +1,41 @@
-from figura import *
-from tela import *
-from opcoes import *
+from Model.figura import *
+from View.tela import *
+from View.opcoes import *
 
-class Elipse(Figura):
-
+class Retangulo(Figura):
     def __init__(self):
-        super().__init__("Elipse", None, None)
-
+        super().__init__("Retângulo", None, None)
         self.ini_x = None
         self.ini_y = None
         self.fim_x = None
         self.fim_y = None
 
-        self.coordenadas = (
-            self.ini_x,
-            self.ini_y,
-            self.fim_x,
-            self.fim_y
-        )
-
         self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
-        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()]#associa a cor escolhida ao dicionario de cores (preenchimento)
+        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()] #associa a cor escolhida ao dicionario de cores (preenchimento)
 
-    # Quando o mouse é pressionado
     def inicia_figura(self, event):
         self.ini_x = event.x
         self.ini_y = event.y
 
-        self.fim_x = event.x
-        self.fim_y = event.y
-
-    # Quando o mouse é movido
     def atualiza_figura(self, event):
-
         self.fim_x = event.x
         self.fim_y = event.y
-
-        
         self.desenhar_figura()
+        # Desenha o retângulo temporário (pontilhado) enquanto arrasta
+        canvas.create_rectangle(self.ini_x, self.ini_y, self.fim_x, self.fim_y, dash=(4, 2), outline=self.cor)
 
-        if not self.incompleta():
-            canvas.create_oval(
-                self.ini_x,
-                self.ini_y,
-                self.fim_x,
-                self.fim_y,
-                dash=(4, 2),
-                outline=self.cor_contorno
-            )
-        
-
-    # Quando o mouse é solto
     def incluir_figura(self, event):
+        self.fim_x = event.x
+        self.fim_y = event.y
 
         if self.incompleta():
+            self.desenhar_figura()
+            return  # Não desenha se o retângulo for incompleto
+    
+        self.coordenadas = (self.ini_x, self.ini_y, self.fim_x, self.fim_y)
 
-            self.desenhar_figura
-            return
-
-        self.coordenadas = (
-            self.ini_x,
-            self.ini_y,
-            self.fim_x,
-            self.fim_y
-        )
-
-        figuras.append(
-            (self.nome, self.coordenadas, self.cor_contorno, self.cor_preenchimento)
-        )
-
+        #Guardamos uma tupla contendo: (tipo_da_figura, coordenadas, cor)
+        figuras.append(("Retângulo", self.coordenadas, self.cor_contorno, self.cor_preenchimento))
         self.desenhar_figura()
 
     def desenhar_figura(self):
@@ -99,7 +66,4 @@ class Elipse(Figura):
 
 
     def incompleta(self):
-        return (
-            self.ini_x == self.fim_x or
-            self.ini_y == self.fim_y
-        )
+        return self.ini_x == self.fim_x and self.ini_y == self.fim_y
