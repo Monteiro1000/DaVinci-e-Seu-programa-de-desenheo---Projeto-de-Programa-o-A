@@ -12,9 +12,4 @@ from mouse import *
 
 # ******** MAIN ******** #
 
-
-canvas.bind("<ButtonPress-1>", clique_no_mouse)
-canvas.bind("<B1-Motion>", mover_mouse)
-canvas.bind("<ButtonRelease-1>", soltar_mouse)
-
 tela.mainloop()

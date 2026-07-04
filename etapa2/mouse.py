@@ -46,3 +46,7 @@ def mover_mouse(event):
 
 def soltar_mouse(event):
     figura.incluir_figura(event)
+
+canvas.bind("<ButtonPress-1>", clique_no_mouse)
+canvas.bind("<B1-Motion>", mover_mouse)
+canvas.bind("<ButtonRelease-1>", soltar_mouse)

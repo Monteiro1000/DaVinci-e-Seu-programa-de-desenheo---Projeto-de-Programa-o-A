@@ -22,7 +22,7 @@ class Circulo(Figura):
 
         self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
         self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()]#associa a cor escolhida ao dicionario de cores(preenchimento)
-        self.raio = None
+        self.raio = 0
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):
@@ -36,8 +36,8 @@ class Circulo(Figura):
         self.fim_y = event.y
      
         self.desenhar_figura()
-
-        self.raio = ( (self.ini_x - self.fim_x)**2 + (self.ini_y - self.fim_y)**2 ) ** 0.5 #calcula o raio do circulo
+        if self.incompleta():
+            self.raio = ( (self.ini_x - self.fim_x)**2 + (self.ini_y - self.fim_y)**2 ) ** 0.5 #calcula o raio do circulo
 
         canvas.create_oval(self.ini_x-self.raio, self.ini_y-self.raio, self.ini_x+self.raio, self.ini_y+self.raio, dash=(4,2),
                            outline=self.cor_contorno)
