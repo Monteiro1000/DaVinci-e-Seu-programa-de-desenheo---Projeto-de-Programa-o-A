@@ -2,6 +2,37 @@ from tkinter import ttk
 from classe_figura import *
 from tela_figuras import *
 
+def option_menu_desenhos():
+    """Cria o menu de seleção das figuras."""
+
+    Label(frame, text="").grid(column=0, row=0, sticky=NW, padx=15, pady=15)
+
+    Label(
+        frame,
+        text="Tipo de figura:"
+    ).grid(column=0, row=0, sticky=NW, padx=8, pady=0)
+
+    global tipo_figura_var
+
+    tipo_figura_var = StringVar(tela)
+    tipo_figura_var.set("Linha")
+
+    option_menu = ttk.OptionMenu(
+        frame,
+        tipo_figura_var,
+        "Linha",
+        "Linha",
+        "Rabisco",
+        "Círculo",
+        "Retângulo",
+        "Elipse"
+    )
+
+    option_menu.grid(column=0, row=0, sticky=NW, padx=4, pady=25)
+
+
+option_menu_desenhos()
+
 descricao_opcao_cor_contorno = Label(frame, text="Cor do contorno:") # Label para o option menu de cores
 
 descricao_opcao_cor_contorno.grid(column=1, row=0, sticky=NW, padx=8, pady=0)
