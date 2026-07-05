@@ -20,7 +20,7 @@ class Linha(Figura):
             self.fim_y
         )
 
-        self.cor = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida da linha ao dicionario de cores
+        self.cor = cor_figura_var_contorno.get() #associa a cor escolhida da linha ao objeto
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):

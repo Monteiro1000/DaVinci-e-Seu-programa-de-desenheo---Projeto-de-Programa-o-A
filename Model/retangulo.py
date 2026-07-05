@@ -10,8 +10,8 @@ class Retangulo(Figura):
         self.fim_x = None
         self.fim_y = None
 
-        self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
-        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()] #associa a cor escolhida ao dicionario de cores (preenchimento)
+        self.cor_contorno = cor_figura_var_contorno.get() #associa a cor escolhida ao objeto (contorno)
+        self.cor_preenchimento = cor_figura_var_preenchimento.get() #associa a cor escolhida ao objeto (preenchimento)
 
     def inicia_figura(self, event):
         self.ini_x = event.x

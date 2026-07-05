@@ -20,8 +20,8 @@ class Circulo(Figura):
             self.fim_y
         )
 
-        self.cor_contorno = dicionario_cores[cor_figura_var_contorno.get()] #associa a cor escolhida ao dicionario de cores (contorno)
-        self.cor_preenchimento = dicionario_cores[cor_figura_var_preenchimento.get()]#associa a cor escolhida ao dicionario de cores(preenchimento)
+        self.cor_contorno = cor_figura_var_contorno.get() #associa a cor escolhida ao objeto (contorno)
+        self.cor_preenchimento = cor_figura_var_preenchimento.get()#associa a cor escolhida ao objeto(preenchimento)
         self.raio = 0
 
     # Quando o mouse é pressionado

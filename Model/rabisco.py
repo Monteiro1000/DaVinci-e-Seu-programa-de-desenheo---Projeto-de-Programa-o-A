@@ -6,7 +6,7 @@ class Rabisco(Figura):
 
     def __init__(self):
         super().__init__(nome="Rabisco", coordenadas=None, 
-        cor=dicionario_cores[cor_figura_var_contorno.get()])
+        cor=cor_figura_var_contorno.get())
         # inicia a classe Rabisco ja selecionando a cor escolhida
 
     def inicia_figura(self, event):
