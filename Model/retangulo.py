@@ -1,6 +1,7 @@
 from Model.figura import *
 from View.tela import *
 from View.opcoes import *
+from View.cores import*
 
 class Retangulo(Figura):
     def __init__(self):
