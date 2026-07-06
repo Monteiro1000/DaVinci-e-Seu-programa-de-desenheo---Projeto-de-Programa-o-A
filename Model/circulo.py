@@ -66,7 +66,7 @@ class Circulo(Figura):
 
     def incompleta(self):
           return (
-             self.ini_x == self.fim_x and
+             self.ini_x == self.fim_x or
             self.ini_y == self.fim_y
         )
         
