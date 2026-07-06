@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 
-
+figuras = []  # Lista para armazenar todas as figuras desenhadas
 class Figura(ABC):
     #classe base para todas as figuras geométricas
     def __init__(self,nome,coordenadas,cor):
@@ -22,10 +22,5 @@ class Figura(ABC):
     # Quando o mouse é solto
     @abstractmethod
     def incluir_figura(self, event):
-        pass
-
-    # Desenha a figura no canvas
-    @abstractmethod
-    def desenhar_figura(self):
         pass
 

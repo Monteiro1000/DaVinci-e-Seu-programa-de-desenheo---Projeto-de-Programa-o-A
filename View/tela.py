@@ -3,8 +3,6 @@ from tkinter import *
 
 
 
-dicionario_cores = {'Preto': 'black', 'Branco': 'white', 'Vermelho': 'red', 'Verde': 'green', 'Azul': 'blue','Nenhum': '', 'amarelo': 'yellow'   }
-figuras = []  # Lista para armazenar todas as figuras desenhadas
 tela = Tk()
 frame = Frame(tela)
 canvas = Canvas(frame, bg='white', width=1280, height=720) # Canvas para desenho

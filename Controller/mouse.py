@@ -42,10 +42,17 @@ def clique_no_mouse(event):
 
 def mover_mouse(event):
     figura.atualiza_figura(event)
+    desenhar_figura()
+    if figura.incompleta():
+        return
+    desenha_temporaria(figura)
 
 
 def soltar_mouse(event):
     figura.incluir_figura(event)
+    if figura.incompleta():
+        return
+    desenhar_figura()
 
 canvas.bind("<ButtonPress-1>", clique_no_mouse)
 canvas.bind("<B1-Motion>", mover_mouse)
