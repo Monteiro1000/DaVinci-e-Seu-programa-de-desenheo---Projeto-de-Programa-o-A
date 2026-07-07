@@ -7,53 +7,57 @@ from Model.rabisco import *
 from Model.retangulo import *
 from Model.circulo import *
 
-figura = Linha()  # Figura inicial
+class Mouse:
+    def __init__(self, canvas, desenhador, tipo_figura_var):
+        self.canvas = canvas
+        self.desenhador = desenhador
+        self.tipo_figura_var = tipo_figura_var
+        self.figura = Linha()
 
+        canvas.bind("<ButtonPress-1>", self.clique_no_mouse)
+        canvas.bind("<B1-Motion>", self.mover_mouse)
+        canvas.bind("<ButtonRelease-1>", self.soltar_mouse)
 
-def criar_figura():
+    def criar_figura(self):
 
-    opcao = tipo_figura_var.get()
+     opcao = self.tipo_figura_var.get()
 
-    if opcao == "Linha":
+     if opcao == "Linha":
         return Linha()
 
-    elif opcao == "Elipse":
+     elif opcao == "Elipse":
         return Elipse()
     
-    elif opcao == "Círculo":
+     elif opcao == "Círculo":
         return Circulo()
 
-    elif opcao == "Retângulo":
+     elif opcao == "Retângulo":
         return Retangulo()
 
-    elif opcao == "Rabisco":
+     elif opcao == "Rabisco":
         return Rabisco()
 
-    return Linha()
+     return Linha()
 
 
-def clique_no_mouse(event):
+    def clique_no_mouse(self, event):
 
-    global figura
-
-    figura = criar_figura()
-    figura.inicia_figura(event)
+      self.figura = self.criar_figura()
+      self.figura.inicia_figura(event)
 
 
-def mover_mouse(event):
-    figura.atualiza_figura(event)
-    desenhar_figura()
-    if figura.incompleta():
+    def mover_mouse(self, event):
+      self.figura.atualiza_figura(event)
+      self.desenhador.desenhar_figura()
+      if self.figura.incompleta():
         return
-    desenha_temporaria(figura)
+      self.desenhador.desenha_temporaria(self.figura)
 
 
-def soltar_mouse(event):
-    figura.incluir_figura(event)
-    if figura.incompleta():
+    def soltar_mouse(self, event):
+     self.figura.incluir_figura(event)
+     if self.figura.incompleta():
         return
-    desenhar_figura()
+     self.desenhador.desenhar_figura()
 
-canvas.bind("<ButtonPress-1>", clique_no_mouse)
-canvas.bind("<B1-Motion>", mover_mouse)
-canvas.bind("<ButtonRelease-1>", soltar_mouse)
+
