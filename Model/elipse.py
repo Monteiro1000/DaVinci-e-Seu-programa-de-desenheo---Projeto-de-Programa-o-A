@@ -1,12 +1,8 @@
 from Model.figura import *
-from View.tela import *
-from View.opcoes import *
-from View.cores import*
-from View.desenha import *
 
 class Elipse(Figura):
 
-    def __init__(self):
+    def __init__(self, cor_contorno, cor_preenchimento):
         super().__init__("Elipse", None, None)
 
         self.ini_x = None
@@ -21,8 +17,8 @@ class Elipse(Figura):
             self.fim_y
         )
 
-        self.cor_contorno = cor_figura_var_contorno.get()#associa a cor escolhida ao objeto (contorno)
-        self.cor_preenchimento = cor_figura_var_preenchimento.get() #associa a cor escolhida ao objeto (preenchimento)
+        self.cor_contorno = cor_contorno
+        self.cor_preenchimento = cor_preenchimento
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):

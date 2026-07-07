@@ -1,14 +1,10 @@
 from Model.figura import *
-from View.tela import *
-from View.opcoes import *
-from View.cores import*
-from View.desenha import *
 
 class Rabisco(Figura):
 
-    def __init__(self):
+    def __init__(self, cor):
         super().__init__(nome="Rabisco", coordenadas=None, 
-        cor=cor_figura_var_contorno.get())
+        cor= cor)
         # inicia a classe Rabisco ja selecionando a cor escolhida
 
     def inicia_figura(self, event):

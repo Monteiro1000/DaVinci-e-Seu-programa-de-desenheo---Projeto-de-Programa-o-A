@@ -1,10 +1,10 @@
 from Model.figura import *
-from View.cores import *
+
 
 
 class Linha(Figura):
 
-    def __init__(self):
+    def __init__(self, cor):
         super().__init__("Linha", None, None)
 
         self.ini_x = None
@@ -19,7 +19,7 @@ class Linha(Figura):
             self.fim_y
         )
 
-        self.cor = cor_figura_var_contorno.get() #associa a cor escolhida da linha ao objeto
+        self.cor = cor
 
     # Quando o mouse é pressionado
     def inicia_figura(self, event):

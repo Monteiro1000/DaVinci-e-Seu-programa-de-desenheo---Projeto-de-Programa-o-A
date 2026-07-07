@@ -1,12 +1,9 @@
 from Model.figura import *
-from View.tela import *
-from View.opcoes import*
-from View.cores import*
-from View.desenha import *
+
 
 class Circulo(Figura):
 
-    def __init__(self):
+    def __init__(self, cor_contorno, cor_preenchimento):
         super().__init__("Círculo", None, None)
 
         self.cor = "black"
@@ -23,10 +20,8 @@ class Circulo(Figura):
             self.fim_y
         )
 
-        self.cor_contorno = cor_figura_var_contorno.get() #associa a cor escolhida ao objeto (contorno)
-        self.cor_preenchimento = cor_figura_var_preenchimento.get()#associa a cor escolhida ao objeto(preenchimento)
-        self.raio = 0
-
+        self.cor_contorno = cor_contorno
+        self.cor_preenchimento = cor_preenchimento
     # Quando o mouse é pressionado
     def inicia_figura(self, event):
         self.ini_x = event.x

@@ -1,20 +1,15 @@
 from Model.figura import *
-from View.tela import *
-from View.opcoes import *
-from View.cores import*
-from View.desenha import *
 
 class Retangulo(Figura):
-    def __init__(self):
+    def __init__(self, cor_contorno, cor_preenchimento):
         super().__init__("Retângulo", None, None)
         self.ini_x = None
         self.ini_y = None
         self.fim_x = None
         self.fim_y = None
 
-        self.cor_contorno = cor_figura_var_contorno.get() #associa a cor escolhida ao objeto (contorno)
-        self.cor_preenchimento = cor_figura_var_preenchimento.get() #associa a cor escolhida ao objeto (preenchimento)
-
+        self.cor_contorno = cor_contorno
+        self.cor_preenchimento = cor_preenchimento
     def inicia_figura(self, event):
         self.ini_x = event.x
         self.ini_y = event.y
