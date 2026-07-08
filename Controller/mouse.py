@@ -63,4 +63,7 @@ class Mouse:
         return
      self.desenhador.desenhar_figura()
 
+     def limpar_tela():
+        figuras.clear() #esvazia a lista de figuras
+        canvas.delete("all") #limpa o canvas
 
