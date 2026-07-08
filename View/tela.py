@@ -31,8 +31,7 @@ instrucoes = Label( #Instruções para o usuário
         "1. Selecione a figura desejada,\n"
         "2. Clique no canvas para desenhar a figura,\n"
         "3. Para desenhar linhas, clique e arraste o mouse.\n"
-        "4. Para apagar, selecione a opção 'Apagar' e clique na figura.\n"
-        "5. Para limpar o canvas, selecione a opção 'Limpar'.",
+        "4. Para limpar o canvas, selecione a opção 'Limpar'.",
   
   justify=LEFT, #ajusta o texto à esquerda
   font=("Arial", 10),
