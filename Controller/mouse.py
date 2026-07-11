@@ -7,6 +7,7 @@ from Model.elipse import *
 from Model.rabisco import *
 from Model.retangulo import *
 from Model.circulo import *
+from Model.quadrado import *
 
 class Mouse:
     def __init__(self, canvas, desenhador, tipo_figura_var):
@@ -39,6 +40,10 @@ class Mouse:
 
      elif opcao == "Rabisco":
         return Rabisco(cor_contorno)
+     
+     elif opcao == "Quadrado":
+        return Quadrado(cor_contorno, cor_preenchimento)
+     
 
      return Linha(cor_contorno)
 

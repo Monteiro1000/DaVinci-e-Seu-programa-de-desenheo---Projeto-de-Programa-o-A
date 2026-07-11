@@ -31,6 +31,7 @@ class OpcoesFiguras:
             "Rabisco",
             "Círculo",
             "Retângulo",
+            "Quadrado",
             "Elipse"
         )
 

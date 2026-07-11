@@ -32,6 +32,11 @@ class Desenha:
             self.canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3],
             outline=figura[2], fill=figura[3])
 
+        elif figura[0] == "Quadrado":
+            self.canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3],
+            outline=figura[2], fill=figura[3])
+
+
   def desenha_temporaria(self, figura):
 
     if figura.nome == "Linha":
@@ -63,3 +68,7 @@ class Desenha:
 
     if figura.nome == "Retângulo":
         self.canvas.create_rectangle(figura.ini_x, figura.ini_y, figura.fim_x, figura.fim_y, dash=(4, 2), outline=figura.cor_contorno)
+    
+    if figura.nome == "Quadrado":
+        self.canvas.create_rectangle(figura.ini_x, figura.ini_y, figura.fim_x, figura.fim_y, dash=(4, 2), outline=figura.cor_contorno)
+
