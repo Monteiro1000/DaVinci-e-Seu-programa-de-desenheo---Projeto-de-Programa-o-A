@@ -15,10 +15,29 @@ class Quadrado(Figura):
         self.ini_y = event.y
 
     def atualiza_figura(self, event):
-        self.fim_x = event.x
-        distancia_x = self.fim_x - self.ini_x #calcula a distancia entre o x final e o x inicial
-        self.fim_y = self.ini_y + distancia_x #calcula o x final para os lados ficarem iguais
         
+        aux_x = event.x 
+        aux_y = event.y
+        #variaveis auxiliares que guardam a posicao do mouse
+
+        lado = min(abs(aux_x - self.ini_x),abs(aux_y - self.ini_y))
+        #separa o menor lado do quadrado, pelo valor absoluto da distancia entre as coordenadas
+
+
+        #estrutura condicional para decidir qual lado o quadrado vai seguir
+        if aux_x < self.ini_x: #se o segundo x estiver a esquerda o quadrado irá para esquerda
+            self.fim_x = self.ini_x - lado #define o x final
+
+        else: # se não, irá para direita
+            self.fim_x = self.ini_x + lado #define o x final
+        
+        if aux_y < self.ini_y: #se o segundo y estiver em cima o quadrado irá para cima
+            self.fim_y = self.ini_y - lado #define o y final
+
+        else: #se não, irá para baixo
+            self.fim_y = self.ini_y + lado #define o y final
+      
+
     def incluir_figura(self, event): 
 
         if self.incompleta():
