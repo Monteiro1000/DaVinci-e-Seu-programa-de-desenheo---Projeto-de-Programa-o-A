@@ -16,8 +16,8 @@ class Quadrado(Figura):
 
     def atualiza_figura(self, event):
         self.fim_x = event.x
-        distancia_x = self.fim_x-self.ini_x
-        self.fim_y = self.ini_y+distancia_x
+        distancia_x = self.fim_x - self.ini_x #calcula a distancia entre o x final e o x inicial
+        self.fim_y = self.ini_y + distancia_x #calcula o x final para os lados ficarem iguais
         
     def incluir_figura(self, event): 
 
