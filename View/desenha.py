@@ -72,3 +72,4 @@ class Desenha:
     if figura.nome == "Quadrado":
         self.canvas.create_rectangle(figura.ini_x, figura.ini_y, figura.fim_x, figura.fim_y, dash=(4, 2), outline=figura.cor_contorno)
 
+desenhador = Desenha(canvas)

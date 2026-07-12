@@ -8,6 +8,7 @@ from Model.rabisco import *
 from Model.retangulo import *
 from Model.circulo import *
 from Model.quadrado import *
+from View.desenha import *
 
 class Mouse:
     def __init__(self, canvas, desenhador, tipo_figura_var):
@@ -72,3 +73,4 @@ class Mouse:
         figuras.clear() #esvazia a lista de figuras
         canvas.delete("all") #limpa o canvas
 
+mouse_controller = Mouse(canvas, desenhador, tipo_figura_var)

@@ -2,6 +2,7 @@ from tkinter import ttk
 from View.tela import *
 from Model.figura import *
 from tkinter import Button
+from Controller.salvar_abrir import Salvar_Abrir
 
 class OpcoesFiguras:
     def __init__(self):
@@ -46,9 +47,32 @@ botao_limpar = Button(
         font=("Arial", 10, "bold")
 )
 botao_limpar.grid(column=0, row=10, sticky=EW, padx=10, pady=10)
+
+
+
+botao_salvar = Button(
+     frame,
+     text='Salvar',
+        command=lambda: Salvar_Abrir.salvar_desenho (),  
+        bg='blue',
+        fg='white',
+        font=("Arial", 10, "bold")
+)
+botao_salvar.grid(column=0, row=11, sticky=EW, padx=10, pady=5)
+
+
+botao_abrir = Button(
+     frame,
+     text='Abrir',
+        command=lambda: Salvar_Abrir.abrir_desenho (), 
+        bg='blue',
+        fg='white',
+        font=("Arial", 10, "bold")
+)
+botao_abrir.grid(column=0, row=12, sticky=EW, padx=10, pady=5)
+
 opcoes_figuras = OpcoesFiguras()
 opcoes_figuras.option_menu_desenhos()
-
 
 
 
