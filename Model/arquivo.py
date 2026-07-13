@@ -21,6 +21,7 @@ class Arquivo:
                 dados = pickle.load(arquivo_binario)
         except Exception as erro:
             messagebox.showerror("Erro ao abrir", f"Não foi possível abrir o arquivo:\n{erro}")
+            return False
     
         figuras.clear()
         figuras.extend(dados)
