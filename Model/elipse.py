@@ -34,13 +34,6 @@ class Elipse(Figura):
         self.fim_x = event.x
         self.fim_y = event.y
 
-        
-        
-
-        if self.incompleta():
-            return
-        
-
     # Quando o mouse é solto
     def incluir_figura(self, event):
 
