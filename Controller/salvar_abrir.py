@@ -19,10 +19,9 @@ class Salvar_Abrir:
         arquivo.salvar_arquivo(caminho)
     
     def abrir_desenho(self):
-        caminho = filedialog.asksaveasfilename(
+        caminho = filedialog.askopenfilename(
             title = "Abrir desenho",
             filetypes = [("Arquivo de desenho (Da Vinci)", "*.davinci")]
-     
         )
 
         if not caminho:
