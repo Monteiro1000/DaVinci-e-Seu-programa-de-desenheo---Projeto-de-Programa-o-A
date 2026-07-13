@@ -28,18 +28,20 @@ class Mouse:
 
 
             #criacao das instancias de cada ferramenta
-            self.ferramenta_linha = Linha_Ferramenta(self.canvas,self.desenhador)
-            self.ferramenta_retangulo = Retangulo_Ferramenta(self.canvas,self.desenhador)
-            self.ferramenta_rabisco = Rabisco_Ferramenta(self.canvas,self.desenhador)
-            self.ferramenta_circulo = Circulo_Ferramenta(self.canvas,self.desenhador)
-            self.ferramenta_elipse = Elipse_Ferramenta(self.canvas,self.desenhador)
-            self.ferramenta_quadrado = Quadrado_Ferramenta(self.canvas,self.desenhador)
+            self.ferramentas = {
+                  "Linha": Linha_Ferramenta(self.canvas, self.desenhador),
+                  "Retângulo": Retangulo_Ferramenta(self.canvas, self.desenhador),
+                  "Rabisco": Rabisco_Ferramenta(self.canvas, self.desenhador),
+                  "Círculo": Circulo_Ferramenta(self.canvas, self.desenhador),
+                  "Elipse": Elipse_Ferramenta(self.canvas, self.desenhador),
+                  "Quadrado": Quadrado_Ferramenta(self.canvas, self.desenhador),
+            }
             
             #ferramenta inicial
-            self.ferramenta_desenho =  self.ferramenta_linha
+            self.ferramenta_desenho = self.ferramentas["Linha"]
 
             #serve para reagir quando muda a opcao da figura 
-            self.tipo_figura.trace("w",self.muda_ferramenta)
+            self.tipo_figura.trace("w", self.muda_ferramenta)
 
 
             #Eventos do mouse para os desenhos no canvas
@@ -48,19 +50,9 @@ class Mouse:
             canvas.bind("<ButtonRelease-1>", self.soltar_mouse)
 
       # Ao mudar o option menu que escolhe a ferramenta de desenho essa funcao muda a ferramenta escolhida
-      def muda_ferramenta(self,*args):
-         if self.tipo_figura.get() == "Linha":
-             self.ferramenta_desenho = self.ferramenta_linha
-         elif self.tipo_figura.get() == "Retângulo":
-            self.ferramenta_desenho = self.ferramenta_retangulo
-         elif self.tipo_figura.get() == "Rabisco":
-            self.ferramenta_desenho = self.ferramenta_rabisco
-         elif self.tipo_figura.get() == "Círculo":
-             self.ferramenta_desenho = self.ferramenta_circulo
-         elif self.tipo_figura.get() == "Elipse":
-             self.ferramenta_desenho = self.ferramenta_elipse
-         elif self.tipo_figura.get() == "Quadrado":
-             self.ferramenta_desenho = self.ferramenta_quadrado
+      def muda_ferramenta(self, *args):
+            nome_ferramenta = self.tipo_figura.get()
+            self.ferramenta_desenho = self.ferramentas.get(nome_ferramenta, self.ferramentas["Linha"])
       
 
 
