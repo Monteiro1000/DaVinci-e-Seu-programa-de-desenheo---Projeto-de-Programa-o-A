@@ -55,8 +55,8 @@ class Mouse:
             canvas.bind("<B1-Motion>", self.mover_mouse)
             canvas.bind("<ButtonRelease-1>", self.soltar_mouse)
             canvas.bind_all("<Delete>", self.apagar_selecionada)
-            canvas.bind_all("<Right>", self.mover_para_frente)
-            canvas.bind_all("<Left>", self.mover_para_tras)
+            canvas.bind("<Right>", self.mover_para_frente)
+            canvas.bind("<Left>", self.mover_para_tras)
             canvas.bind_all("<Up>", self.mover_para_topo)
             canvas.bind_all("<Down>", self.mover_para_fundo)
             canvas.bind_all("<Control-c>", self.copiar_selecionada)
@@ -214,6 +214,7 @@ class Mouse:
                   figuras.insert(indice + 1, figuras.pop(indice))
                   self.figura_selecionada = indice + 1
                   self.desenhador.desenhar_figura(self.figura_selecionada)
+            return "break"
 
       def mover_para_tras(self, event=None):
             if self.figura_selecionada is None:
@@ -225,6 +226,7 @@ class Mouse:
                   figuras.insert(indice - 1, figuras.pop(indice))
                   self.figura_selecionada = indice - 1
                   self.desenhador.desenhar_figura(self.figura_selecionada)
+            return "Break"
 
       def mover_para_topo(self, event=None):
             if self.figura_selecionada is None:

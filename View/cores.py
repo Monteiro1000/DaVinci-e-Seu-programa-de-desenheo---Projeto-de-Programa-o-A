@@ -4,6 +4,7 @@ from Model.figura import *
 
 
 
+
 # criacao de variaveis globais para declaracao das cores em cada figura
 cor_figura_var_contorno = StringVar()
 cor_figura_var_contorno.set("black") #define a cor padrao do contorno
@@ -22,6 +23,8 @@ class Cores:
 
     # Aplica a cor escolhida na figura atualmente selecionada, se houver.
     def aplica_cor_selecionada(self, cor):
+
+        from View.desenha import desenhador
         from Controller.mouse import mouse_controller
         if getattr(mouse_controller, "figura_selecionada", None) is None:
             return
