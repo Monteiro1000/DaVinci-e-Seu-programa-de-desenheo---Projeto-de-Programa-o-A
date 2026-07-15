@@ -7,7 +7,7 @@ class Desenha:
   def __init__(self, canvas):
       self.canvas = canvas
 
-  def desenhar_figura(self):
+  def desenhar_figura(self, selecionada_idx=None):
     canvas.delete("all") # Limpa os rastros antigos
 
     for figura in figuras:
@@ -36,7 +36,28 @@ class Desenha:
             self.canvas.create_rectangle(figura[1][0], figura[1][1], figura[1][2], figura[1][3],
             outline=figura[2], fill=figura[3])
 
-
+    if selecionada_idx is not None and 0 <= selecionada_idx < len(figuras):
+        x1,y1,x2,y2 = self._bbox_figura(figuras[selecionada_idx])
+        self.canvas.create_rectangle(    x1 - 4, y1 - 4, x2 + 4, y2 + 4,
+            outline="Blue", dash=(4, 2)
+        )
+ 
+  #Calcula (x1,y1,x2,y2) que envolve a figura, para desenhar o destaque de seleção.
+  def _bbox_figura(self, figura):
+    
+     nome = figura[0]
+     if nome == "Círculo":
+        cx, cy, raio = figura[1]
+        return (cx - raio, cy - raio, cx + raio, cy + raio)
+     elif nome == "Rabisco":
+        pontos = figura[1]
+        xs = [p[0] for p in pontos]
+        ys = [p[1] for p in pontos]
+        return (min(xs), min(ys), max(xs), max(ys))
+     else:  # Linha, Elipse, Retângulo, Quadrado
+        x1, y1, x2, y2 = figura[1]
+        return (min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
+     
   def desenha_temporaria(self, figura):
 
     if figura.nome == "Linha":

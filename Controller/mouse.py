@@ -17,6 +17,7 @@ from Controller.ferramenta_rabisco import *
 from Controller.ferramenta_circulo import *
 from Controller.ferramenta_elipse import *
 from Controller.ferramenta_quadrado import *
+from Model.historico import historico
 
 
 class Mouse:
@@ -60,29 +61,33 @@ class Mouse:
             canvas.bind_all("<Down>", self.mover_para_fundo)
             canvas.bind_all("<Control-c>", self.copiar_selecionada)
             canvas.bind_all("<Control-v>", self.colar_selecionada)
+            canvas.bind_all("<Control-z>", self.desfazer_acao)
 
       # Ao mudar o option menu que escolhe a ferramenta de desenho essa funcao muda a ferramenta escolhida
       def muda_ferramenta(self, *args):
             nome_ferramenta = self.tipo_figura.get()
-            if nome_ferramenta == "Seleção":
+            if nome_ferramenta == "Selecionar":
                   self.ferramenta_desenho = None
             else:
+                  self.figura_selecionada = None
+                  self.arrastando = False
                   self.ferramenta_desenho = self.ferramentas.get(nome_ferramenta, self.ferramentas["Linha"])
+                  self.desenhador.desenhar_figura()
       
 
 
       def clique_no_mouse(self, event):
          self.canvas.focus_set()
-         if self.tipo_figura.get() == "Seleção":
+         if self.tipo_figura.get() == "Selecionar":
                # Seleciona a figura clicada para executar as operações de edição
                self.selecionar_figura(event)
                return
-
+         historico.salva_estado()
          self.ferramenta_desenho.mouse_pressionado(event)
 
 
       def mover_mouse(self, event):
-         if self.tipo_figura.get() == "Seleção":
+         if self.tipo_figura.get() == "Selecionar":
                # Move a figura selecionada enquanto o botão esquerdo do mouse é arrastado
                if self.arrastando and self.figura_selecionada is not None:
                      self.mover_figura_selecionada(event.x - self.ultimo_x, event.y - self.ultimo_y)
@@ -94,9 +99,9 @@ class Mouse:
 
 
       def soltar_mouse(self, event):
-         if self.tipo_figura.get() == "Seleção":
+         if self.tipo_figura.get() == "Selecionar":
                self.arrastando = False
-               self.desenhador.desenhar_figura()
+               self.desenhador.desenhar_figura(self.figura_selecionada)
                return
 
          self.ferramenta_desenho.mouse_solto(event)
@@ -107,13 +112,14 @@ class Mouse:
             self.figura_selecionada = indice
             if indice is None:
                   self.arrastando = False
-                  self.desenhador.desenhar_figura()
+                  self.desenhador.desenhar_figura(self.figura_selecionada)
                   return
-
+            
+            historico.salva_estado()
             self.arrastando = True
             self.ultimo_x = event.x
             self.ultimo_y = event.y
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def encontrar_figura(self, event):
             for indice in range(len(figuras) - 1, -1, -1):
@@ -187,61 +193,72 @@ class Mouse:
                   x1, y1, x2, y2 = figura[1]
                   figuras[self.figura_selecionada] = (nome, (x1 + delta_x, y1 + delta_y, x2 + delta_x, y2 + delta_y), *figura[2:])
 
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def apagar_selecionada(self, event=None):
             if self.figura_selecionada is None:
                   return
+            
+            historico.salva_estado()
             figuras.pop(self.figura_selecionada)
             self.figura_selecionada = None
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def mover_para_frente(self, event=None):
             if self.figura_selecionada is None:
                   return
             indice = self.figura_selecionada
             if indice < len(figuras) - 1:
+                  
+                  historico.salva_estado()
                   figuras.insert(indice + 1, figuras.pop(indice))
                   self.figura_selecionada = indice + 1
-                  self.desenhador.desenhar_figura()
+                  self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def mover_para_tras(self, event=None):
             if self.figura_selecionada is None:
                   return
             indice = self.figura_selecionada
             if indice > 0:
+                  
+                  historico.salva_estado()
                   figuras.insert(indice - 1, figuras.pop(indice))
                   self.figura_selecionada = indice - 1
-                  self.desenhador.desenhar_figura()
+                  self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def mover_para_topo(self, event=None):
             if self.figura_selecionada is None:
                   return
+           
+            historico.salva_estado()
             indice = self.figura_selecionada
             figuras.append(figuras.pop(indice))
             self.figura_selecionada = None
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def mover_para_fundo(self, event=None):
             if self.figura_selecionada is None:
                   return
+           
+            historico.salva_estado()
             indice = self.figura_selecionada
             figuras.insert(0, figuras.pop(indice))
             self.figura_selecionada = 0
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def copiar_selecionada(self, event=None):
             # Guarda uma cópia da figura selecionada para uso posterior com CTRL-C/CTRL-V.
             if self.figura_selecionada is None:
                   return
             self.buffer = copy.deepcopy(figuras[self.figura_selecionada])
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def colar_selecionada(self, event=None):
             # Insere a figura copiada no canvas deslocando-a levemente para evitar sobreposição.
             if self.buffer is None:
                   return
 
+            historico.salva_estado()
             figura_copiada = copy.deepcopy(self.buffer)
             if figura_copiada[0] == "Rabisco":
                   pontos = [(ponto[0] + 10, ponto[1] + 10) for ponto in figura_copiada[1]]
@@ -252,10 +269,16 @@ class Mouse:
 
             figuras.append(figura_copiada)
             self.figura_selecionada = len(figuras) - 1
-            self.desenhador.desenhar_figura()
+            self.desenhador.desenhar_figura(self.figura_selecionada)
 
       def limpar_tela(self):
          figuras.clear() #esvazia a lista de figuras
          self.canvas.delete("all") #limpa o canvas
+      
+      def desfazer_acao(self, event = None):
+            if historico.desfazer():
+                  self.figura_selecionada = None
+                  self.arrastando = False
+                  self.desenhador.desenhar_figura()
 
 mouse_controller = Mouse(canvas, desenhador, tipo_figura_var)

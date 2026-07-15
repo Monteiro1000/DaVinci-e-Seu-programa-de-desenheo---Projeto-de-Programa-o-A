@@ -33,7 +33,8 @@ class OpcoesFiguras:
             "Círculo",
             "Retângulo",
             "Quadrado",
-            "Elipse"
+            "Elipse",
+            "Selecionar",
         )
 
         option_menu.grid(column=0, row=0, sticky=NW, padx=4, pady=25)
