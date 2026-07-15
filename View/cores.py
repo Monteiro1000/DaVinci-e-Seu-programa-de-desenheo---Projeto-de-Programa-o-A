@@ -20,7 +20,29 @@ class Cores:
         self.nome = "classe cores"
         pass
 
-    
+    # Aplica a cor escolhida na figura atualmente selecionada, se houver.
+    def aplica_cor_selecionada(self, cor):
+        from Controller.mouse import mouse_controller
+        if getattr(mouse_controller, "figura_selecionada", None) is None:
+            return
+
+        indice = mouse_controller.figura_selecionada
+        if indice is None or indice >= len(figuras):
+            return
+
+        figura = list(figuras[indice])
+        nome = figura[0]
+
+        if contorno.get() == "True":
+            if nome in {"Linha", "Rabisco"}:
+                figuras[indice] = (nome, figura[1], cor)
+            elif len(figura) >= 4:
+                figuras[indice] = (nome, figura[1], cor, figura[3])
+
+        if preenchimento.get() == "True" and nome in {"Elipse", "Círculo", "Retângulo", "Quadrado"} and len(figura) >= 4:
+            figuras[indice] = (nome, figura[1], figura[2], cor)
+
+        desenhador.desenhar_figura()
 
     # Funcao que define se o botao de preenchimento esta apertado
     def aperta_preenchimento(self):
@@ -62,6 +84,7 @@ class Cores:
             cor_figura_var_contorno.set("black")
         if preenchimento.get() == "True":
             cor_figura_var_preenchimento.set('black')
+        self.aplica_cor_selecionada("black")
         return cor_figura_var_contorno and cor_figura_var_preenchimento
 
 
@@ -76,6 +99,7 @@ class Cores:
             cor_figura_var_contorno.set("gray")
         if preenchimento.get() == "True":
             cor_figura_var_preenchimento.set('gray')
+        self.aplica_cor_selecionada("gray")
         return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao cinza
@@ -88,6 +112,7 @@ class Cores:
                 cor_figura_var_contorno.set("white")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('white')
+            self.aplica_cor_selecionada("white")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao branco
@@ -100,6 +125,7 @@ class Cores:
                 cor_figura_var_contorno.set("red")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('red')
+            self.aplica_cor_selecionada("red")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
     
     #layout botao vermelho
@@ -113,6 +139,7 @@ class Cores:
                 cor_figura_var_contorno.set("blue")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('blue')
+            self.aplica_cor_selecionada("blue")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
     
 
@@ -126,6 +153,7 @@ class Cores:
                 cor_figura_var_contorno.set("green")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('green')
+            self.aplica_cor_selecionada("green")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao verde
@@ -138,6 +166,7 @@ class Cores:
                 cor_figura_var_contorno.set("yellow")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('yellow')
+            self.aplica_cor_selecionada("yellow")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao amarelo
@@ -150,6 +179,7 @@ class Cores:
                 cor_figura_var_contorno.set("pink")
             if preenchimento.get() == "True":
                 cor_figura_var_preenchimento.set('pink')
+            self.aplica_cor_selecionada("pink")
             return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao rosa
@@ -162,6 +192,7 @@ class Cores:
                     cor_figura_var_contorno.set("lightblue")
                 if preenchimento.get() == "True":
                     cor_figura_var_preenchimento.set('lightblue')
+                self.aplica_cor_selecionada("lightblue")
                 return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout botao azul claro
@@ -174,6 +205,7 @@ class Cores:
                     cor_figura_var_contorno.set("purple")
                 if preenchimento.get() == "True":
                     cor_figura_var_preenchimento.set('purple')
+                self.aplica_cor_selecionada("purple")
                 return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout do botao roxo
@@ -186,6 +218,7 @@ class Cores:
                     cor_figura_var_contorno.set("brown")
                 if preenchimento.get() == "True":
                     cor_figura_var_preenchimento.set('brown')
+                self.aplica_cor_selecionada("brown")
                 return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout do botao marrom
@@ -198,6 +231,7 @@ class Cores:
                     cor_figura_var_contorno.set("orange")
                 if preenchimento.get() == "True":
                     cor_figura_var_preenchimento.set('orange')
+                self.aplica_cor_selecionada("orange")
                 return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout do botao laranja
@@ -210,6 +244,7 @@ class Cores:
                      cor_figura_var_contorno.set("")
                 if preenchimento.get() == "True":
                     cor_figura_var_preenchimento.set('')
+                self.aplica_cor_selecionada("")
                 return cor_figura_var_contorno and cor_figura_var_preenchimento
 
     #layout do botao sem cor
