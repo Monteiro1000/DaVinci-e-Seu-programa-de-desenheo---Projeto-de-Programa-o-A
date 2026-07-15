@@ -94,6 +94,11 @@ class Mouse:
 
 
       def soltar_mouse(self, event):
+         if self.tipo_figura.get() == "Seleção":
+               self.arrastando = False
+               self.desenhador.desenhar_figura()
+               return
+
          self.ferramenta_desenho.mouse_solto(event)
 
       def limpar_tela():
