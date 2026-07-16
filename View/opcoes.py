@@ -29,6 +29,7 @@ class OpcoesFiguras:
             tipo_figura_var,
             "Linha",
             "Linha",
+            "Seleção",
             "Rabisco",
             "Círculo",
             "Retângulo",
